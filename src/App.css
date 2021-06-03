@@ -1,7 +1,36 @@
+@import url('https://fonts.googleapis.com/css?family=Source+Sans+Pro:regular,bold,italic&subset=latin,latin-ext');
 .App {
   text-align: center;
+
+}
+.Banner {
+  color: white;
+  padding: 10px;
+  background-image: url("https://qualityinspection.org/wp-content/uploads/2019/10/CPSIAfortoysandproductsforchildren.jpg");
+  height: 50vh;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  font-family: 'Yanone Kaffeesatz', sans-serif;
+}
+
+.navbar{
+  border-bottom: 1px solid rgb(158, 158, 158);
+}
+
+.title2{
+  opacity: 1.0;
+}
+
+.title1{
+  padding: 10px 15px;
+  display: inline-block;
+  background-color: rgb(0, 0, 0, 0.3);
+
 }
 
 .searchbar {
-  width: 40%;
+  margin: auto;
+  width: 70%;
+
 }

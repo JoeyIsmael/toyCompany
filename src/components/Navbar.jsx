@@ -4,7 +4,6 @@ import {
   Collapse,
   NavbarToggler,
   NavbarBrand,
-  Input
 } from 'reactstrap';
 
 import '../App.css'
@@ -16,11 +15,10 @@ const Navigation = (props) => {
 
   return (
     <div>
-      <Navbar color="light" light expand="md">
+      <Navbar color="light" className="navbar" light expand="md">
         <NavbarBrand href="/">kidsratetoys</NavbarBrand>
         <NavbarToggler onClick={toggle} />
         <Collapse isOpen={isOpen} navbar>
-          <Input className="searchbar" placeholder="Find a Toy"></Input>
         </Collapse>
       </Navbar>
     </div>
