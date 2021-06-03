@@ -1,17 +1,38 @@
 @import url('https://fonts.googleapis.com/css?family=Source+Sans+Pro:regular,bold,italic&subset=latin,latin-ext');
-.App {
+.App{
   text-align: center;
 
 }
-.Banner {
+.Banner{
   color: white;
-  padding: 10px;
+  padding: 130px;
   background-image: url("https://qualityinspection.org/wp-content/uploads/2019/10/CPSIAfortoysandproductsforchildren.jpg");
   height: 50vh;
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
   font-family: 'Yanone Kaffeesatz', sans-serif;
+}
+
+.List{
+  size: 500px;
+  padding-top: 50px;
+  font-family: 'Yanone Kaffeesatz', sans-serif;
+
+}
+
+.List h4{
+  color: gray;
+  size: 500px;
+  padding-top: 10px;
+  font-family: 'Yanone Kaffeesatz', sans-serif;
+
+}
+
+.ToyList{
+  background-color: rgb(233, 209, 142);
+  padding: 50px;
+  margin: 50px;
 }
 
 .navbar{
@@ -29,7 +50,7 @@
 
 }
 
-.searchbar {
+.searchbar{
   margin: auto;
   width: 70%;
 

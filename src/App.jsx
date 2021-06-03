@@ -20,6 +20,18 @@ function App() {
         </InputGroup>
         </div> 
         </div>
+        <div className="List">
+          <h1>
+            Toy Reviews
+          </h1>
+          <br></br>
+          <h4>
+            See what kids have to say about various toys
+          </h4>
+        </div>
+        <div className = "ToyList">
+
+        </div>
     </div>
   );
 }
