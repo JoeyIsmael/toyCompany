@@ -36,7 +36,7 @@ function App() {
           </h1>
           <br></br>
           <h4>
-            See what kids have to say about various toys
+            See what kids have to say about various toy products
           </h4>
         </div>
         <div className = "ToyList">
