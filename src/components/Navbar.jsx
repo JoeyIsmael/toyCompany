@@ -1,34 +1,24 @@
-import React, { useState } from 'react';
+import React from 'react';
 import {
-  Navbar,
-  Collapse,
-  NavbarToggler,
-  NavbarBrand,
-  NavItem,
-  NavLink,
-  Nav,
-} from 'reactstrap';
-
+  Link
+} from "react-router-dom";
 import '../App.css'
 
 const Navigation = (props) => {
-  const [isOpen, setIsOpen] = useState(false);
-
-  const toggle = () => setIsOpen(!isOpen);
 
   return (
     <div>
       <header class="l-header">
         <nav class="nav bd-grid">
           <div>
-            <a href="#" class="nav__logo">Kids Rate Toys</a>
+          <Link to="/"><a class="nav__logo">Kids Rate Toys</a></Link>
           </div>
 
           <div class="nav__menu" id="nav-menu">
             <ul class="nav__list">
-              <li class="nav__item"><a href="#home" class="nav__link active">Home</a></li>
-              <li class="nav__item"><a href="#about" class="nav__link">About</a></li>
-              <li class="nav__item"><a href="#contact" class="nav__link">Contact</a></li>
+              <Link to="/"><li class="nav__item"><a class="nav__link active">Home</a></li></Link>
+              <Link to="#"><li class="nav__item"><a class="nav__link">About</a></li></Link>
+              <Link to="/contact"><li class="nav__item"><a class="nav__link">Contact</a></li></Link>
             </ul>
           </div>
 

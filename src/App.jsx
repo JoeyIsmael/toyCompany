@@ -8,45 +8,28 @@ import {
 } from "react-router-dom";
 
 import Navigation from "./components/Navbar.jsx"
+import Home from "./components/Home.jsx"
 import Toy from "./components/Toy.jsx"
-import { Input, Button, InputGroup, InputGroupAddon } from 'reactstrap'
+import Contact from "./components/Contact.jsx"
+
 function App() {
 
   return (
-    <div className="App">
-
-
-      <Router>
+    <Router>
+        <Navigation />
         <Switch>
           <Route exact path='/'>
-            <Navigation />
-            <div className="Banner">
-              <div className="title1">
-                <h1 className="title2">Looking for a Toy Product Review?</h1>
-                <InputGroup>
-                  <Input className="searchbar" placeholder="Find a Toy" />
-                  <InputGroupAddon addonType="prepend"><Button>Search</Button></InputGroupAddon>
-                </InputGroup>
-              </div>
-            </div>
-            <div className="List">
-          <h1>
-            Toy Reviews
-          </h1>
-          <br></br>
-          <h4>
-            See what kids have to say about various toy products
-          </h4>
-        </div>
-        <div className = "ToyList">
-
-        </div>
-            </Route>
+            <Home />
+          </Route>
           <Route path="/toy/:name" component={Toy} />
+          <Route exact path='/'>
+            <Home />
+          </Route>
+          <Route exact path="/contact">
+            <Contact />
+          </Route>
         </Switch>
-      </Router>
-
-    </div>
+    </Router>
   );
 }
 
