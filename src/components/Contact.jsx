@@ -11,8 +11,8 @@ function Contact() {
                     <form action="" class="contact__form">
                         <input type="text" placeholder="Name" class="contact__input"/>
                         <input type="mail" placeholder="Email" class="contact__input"/>
-                        <textarea name="" id="" cols="0" rows="10" class="contact__input"></textarea>
-                        <input type="button" value="Send" class="contact__button button"/>
+                        <textarea name="message" placeholder="Message" cols="0" rows="10" class="contact__input"></textarea>
+                        <input type="button" value="Enviar" class="contact__button button"/>
                     </form>
                 </div>
             </section>
