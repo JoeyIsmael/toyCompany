@@ -11,6 +11,7 @@ import Navigation from "./components/Navbar.jsx"
 import Home from "./components/Home.jsx"
 import Toy from "./components/Toy.jsx"
 import Contact from "./components/Contact.jsx"
+import About from "./components/About.jsx"
 
 function App() {
 
@@ -27,6 +28,9 @@ function App() {
           </Route>
           <Route exact path="/contact">
             <Contact />
+          </Route>
+          <Route exact path="/about">
+            <About />
           </Route>
         </Switch>
     </Router>

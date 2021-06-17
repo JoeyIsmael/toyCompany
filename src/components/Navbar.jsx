@@ -17,7 +17,7 @@ const Navigation = (props) => {
           <div class="nav__menu" id="nav-menu">
             <ul class="nav__list">
               <Link to="/"><li class="nav__item"><a class="nav__link active">Home</a></li></Link>
-              <Link to="#"><li class="nav__item"><a class="nav__link">About</a></li></Link>
+              <Link to="/about"><li class="nav__item"><a class="nav__link">About</a></li></Link>
               <Link to="/contact"><li class="nav__item"><a class="nav__link">Contact</a></li></Link>
             </ul>
           </div>
