@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, { useState } from 'react';
 import firebase from "../firebase.js";
 import '../App.css'
 
@@ -24,8 +24,23 @@ const Toy = (props) => {
 
   return (
     <div>
-      <h1>{name}</h1>
-      <img src={img_url}/>
+      <center>
+        <h1>{name}</h1>
+        <img src={img_url} />
+      </center>
+
+      <section class="contact section" id="contact">
+        <h2 class="section-title">Add a Review</h2>
+
+        <div class="review__container bd-grid">
+          <form action="" class="review__form">
+            <input type="text" placeholder="Name" class="contact__input" />
+            <textarea name="Review" placeholder="Message" cols="0" rows="10" class="contact__input"></textarea>
+            <input type="button" value="Send" class="contact__button button" />
+          </form>
+        </div>
+      </section>
+
     </div>
   );
 }

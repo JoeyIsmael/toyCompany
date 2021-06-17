@@ -13,7 +13,6 @@ import Toy from "./components/Toy.jsx"
 import Contact from "./components/Contact.jsx"
 
 function App() {
-
   return (
     <Router>
         <Navigation />

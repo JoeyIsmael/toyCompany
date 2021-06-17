@@ -172,9 +172,6 @@ img{
 }
 .l-header{
   width: 100%;
-  position: fixed;
-  top: 0;
-  left: 0;
   z-index: var(--z-fixed);
   background-color: #fff;
   box-shadow: 0 1px 4px rgba(146,161,176,.15);
@@ -494,6 +491,9 @@ img{
   }
   .contact__form{
     width: 360px;
+  }
+  .review__form{
+    /* width: 360px; */
   }
   .contact__container{
     justify-items: center;
