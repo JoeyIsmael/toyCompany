@@ -1,56 +1,104 @@
-import React, { useState } from 'react';
+import React from 'react';
 import "../App.css";
 import { Input, Button, InputGroup, InputGroupAddon } from 'reactstrap'
+
+import {
+    Link
+} from "react-router-dom";
 
 import firebase from "../firebase.js";
 
 const db = firebase.firestore();
 
-const renderPosts = (props) => {
-    const posts = props;
-    if(posts.length > 0) {
-        posts.map(post => {
-            return (
-                <p>{post.name}</p>
-            )
-        })
+
+
+class Home extends React.Component {
+
+    constructor(props) {
+        super(props);
+
+        this.state = {
+            toys: [],
+        }
+
     }
-}
 
-function Home() {
+    componentDidMount() {
 
-    // const [toys, setToys] = useState([]);
+        db.collection("toys")
+            .onSnapshot((querySnapshot) => {
+                let docs = this.state.toys;
+                querySnapshot.docChanges().forEach(change => {
+                    if (change.type === 'added') {
+                        let doc = change.doc;
+                        docs.push(doc.data());
+                    } else if (change.type === 'removed') {
+                        let doc = change.doc;
+                        for (var i = 0; i < docs.length; i++) {
+                            if (docs[i].getId() === doc.id) {
+                                docs.splice(i, 1);
+                            }
+                        }
+                    } else if (change.type === 'modified') {
+                        let doc = change.doc;
+                        for (let i = 0; i < docs.length; i++) {
+                            if (docs[i].getId() === doc.id) {
+                                docs.splice(i, 1, doc);
+                            }
+                        }
+                    }
+                })
+                this.setState({ questions: docs, filteredQuestions: docs, loading_data: false })
+                if (this.state.filterBy === "popularity") {
+                    this.orderByPopularity();
+                } else if (this.state.filterBy === "recent") {
+                    this.orderByTimeStamp();
+                }
+            })
+    }
 
-    // db.collection('toys').get().then(snapshot => {
-    //     snapshot.docs.map(doc => setToys(...toys, doc.data()));
-    //     console.log(toys)
-    // })
 
-    return (
-        <div className="App">
-            <div className="Banner">
-                <div className="title1">
-                    <h1 className="title2">Looking for a Toy Product Review?</h1>
-                    <InputGroup>
-                        <Input className="searchbar" placeholder="Find a Toy" />
-                        <InputGroupAddon addonType="prepend"><Button>Search</Button></InputGroupAddon>
-                    </InputGroup>
+    render() {
+        return (
+            <div className="App">
+                <div className="Banner">
+                    <div className="title1">
+                        <h1 className="title2">Looking for a Toy Product Review?</h1>
+                        <InputGroup>
+                            <Input className="searchbar" placeholder="Find a Toy" />
+                            <InputGroupAddon addonType="prepend"><Button>Search</Button></InputGroupAddon>
+                        </InputGroup>
+                    </div>
+                </div>
+                <div className="List">
+                    <h1>
+                        Toy Reviews
+                    </h1>
+                    <br></br>
+                    <h4>
+                        See what kids have to say about various toy products
+                    </h4>
+                </div>
+                <div className="ToyList">
+                    <ul className="list">
+
+                        {
+                            this.state.toys.map(toy => {
+                                return (
+                                    <Link to={"/toy/" + toy.id}>
+                                        <li>
+                                            <h5>{toy.name}</h5>
+                                            <img src={toy.img} className="post-img" />
+                                        </li>
+                                    </Link>
+                                );
+                            })
+                        }
+                    </ul>
                 </div>
             </div>
-            <div className="List">
-                <h1>
-                    Toy Reviews
-                </h1>
-                <br></br>
-                <h4>
-                    See what kids have to say about various toy products
-                </h4>
-            </div>
-            <div className="ToyList">
-                {/* {renderPosts(toys)} */}
-            </div>
-        </div>
-    );
+        );
+    }
 }
 
 export default Home;

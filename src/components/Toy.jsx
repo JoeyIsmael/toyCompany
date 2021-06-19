@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import firebase from "../firebase.js";
 import '../App.css'
 
+
 const db = firebase.firestore();
 
 const Toy = (props) => {
@@ -25,8 +26,8 @@ const Toy = (props) => {
   return (
     <div>
       <center>
-        <h1>{name}</h1>
-        <img src={img_url} />
+        <h2 class="section-title">{name}</h2>
+        <img src={img_url} className="toy-img"/>
       </center>
 
       <section class="contact section" id="contact">

@@ -22,9 +22,6 @@ function App() {
             <Home />
           </Route>
           <Route path="/toy/:name" component={Toy} />
-          <Route exact path='/'>
-            <Home />
-          </Route>
           <Route exact path="/contact">
             <Contact />
           </Route>
