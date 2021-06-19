@@ -83,7 +83,7 @@ img{
 .Banner{
   color: white;
   padding: 130px;
-  background-image: url("https://qualityinspection.org/wp-content/uploads/2019/10/CPSIAfortoysandproductsforchildren.jpg");
+  background-image: url("https://i.pinimg.com/originals/fc/8b/37/fc8b3779d48335beee63cea777bbf9f0.jpg");
   height: 50vh;
   background-position: center;
   background-repeat: no-repeat;
@@ -107,9 +107,16 @@ img{
 }
 
 .ToyList{
-  background-color: rgb(233, 209, 142);
-  padding: 50px;
+  background-color: white;
+  text-emphasis-color: white;
+  padding-bottom: 50px;
   margin: 50px;
+}
+
+.liList{
+  padding-bottom: 50px;
+  border:1px solid var(--first-color);
+  padding: 2%;
 }
 
 /* .navbar{
@@ -248,6 +255,7 @@ img{
   row-gap: 1rem;
 }
 .home__data{
+  padding: 50px;
   align-self: center;
 }
 .home__title{
@@ -484,6 +492,9 @@ img{
   .home__img{
     width: 457px;
     bottom: 15%;
+  }
+  .head{
+    color: var(--first-color);
   }
 
   .about__container, .skills__container{

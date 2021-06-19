@@ -70,8 +70,8 @@ class Home extends React.Component {
                         </InputGroup>
                     </div>
                 </div>
-                <div className="List">
-                    <h1>
+                <div className="home__data">
+                    <h1 className = "head">
                         Toy Reviews
                     </h1>
                     <br></br>
@@ -81,12 +81,11 @@ class Home extends React.Component {
                 </div>
                 <div className="ToyList">
                     <ul className="list">
-
                         {
                             this.state.toys.map(toy => {
                                 return (
                                     <Link to={"/toy/" + toy.id}>
-                                        <li>
+                                        <li className="liList">
                                             <h5>{toy.name}</h5>
                                             <img src={toy.img} className="post-img" />
                                         </li>
