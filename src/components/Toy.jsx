@@ -1,49 +1,112 @@
-import React, { useState } from 'react';
+import React from 'react';
 import firebase from "../firebase.js";
 import '../App.css'
 
 
 const db = firebase.firestore();
 
-const Toy = (props) => {
-  const name = props.match.params.name;
+class Toy extends React.Component {
 
-  const [img_url, setImgUrl] = useState("");
-
-  var docRef = db.collection("toys").doc(name);
-
-  docRef.get().then((doc) => {
-    if (doc.exists) {
-      console.log("Document data:", doc.data());
-      setImgUrl(doc.data().img);
-    } else {
-      console.log("No such document!");
+  constructor(props) {
+    super(props)
+    this.state = {
+      name: this.props.match.params.name,
+      img_url: "",
+      title: "",
+      reviews: []
     }
-  }).catch((error) => {
-    console.log("Error getting document:", error);
-  });
+  }
 
-  return (
-    <div>
-      <center>
-        <h2 class="section-title">{name}</h2>
-        <img src={img_url} className="toy-img"/>
-      </center>
+  componentDidMount() {
 
-      <section class="contact section" id="contact">
-        <h2 class="section-title">Add a Review</h2>
 
-        <div class="review__container bd-grid">
-          <form action="" class="review__form">
-            <input type="text" placeholder="Name" class="contact__input" />
-            <textarea name="Review" placeholder="Message" cols="0" rows="10" class="contact__input"></textarea>
-            <input type="button" value="Send" class="contact__button button" />
-          </form>
+    var docRef = db.collection("toys").doc(this.state.name);
+
+    docRef.get().then((doc) => {
+      if (doc.exists) {
+        console.log("Document data:", doc.data());
+        this.setState({ img_url: doc.data().img })
+      } else {
+        console.log("No such document!");
+      }
+    }).catch((error) => {
+      console.log("Error getting document:", error);
+    });
+
+    db.collection("toys").doc(this.state.name).collection("reviews")
+      .onSnapshot((querySnapshot) => {
+        let docs = this.state.reviews;
+        querySnapshot.docChanges().forEach(change => {
+          if (change.type === 'added') {
+            let doc = change.doc;
+            docs.push(doc.data());
+          } else if (change.type === 'removed') {
+            let doc = change.doc;
+            for (var i = 0; i < docs.length; i++) {
+              if (docs[i].getId() === doc.id) {
+                docs.splice(i, 1);
+              }
+            }
+          } else if (change.type === 'modified') {
+            let doc = change.doc;
+            for (let i = 0; i < docs.length; i++) {
+              if (docs[i].getId() === doc.id) {
+                docs.splice(i, 1, doc);
+              }
+            }
+          }
+          this.setState({})
+        })
+      })
+  }
+
+  submitHandler = (event) => {
+    event.preventDefault();
+    let message = event.target["Review"].value;
+
+    db.collection("toys").doc(this.state.name).collection("reviews").add({
+      message: message,
+      date: new Date(),
+    })
+  }
+
+
+  render() {
+    return (
+      <div>
+        <center>
+          <h2 class="section-title">{this.state.name}</h2>
+          <img src={this.state.img_url} className="toy-img" />
+        </center>
+
+        <section class="contact section" id="contact">
+          <h2 class="section-title">Add a Review</h2>
+
+          <div class="review__container bd-grid">
+            <form onSubmit={this.submitHandler} action="" class="review__form">
+              <textarea name="Review" placeholder="Message" cols="0" rows="10" class="contact__input"></textarea>
+              <input type="submit" value="Send" class="contact__button button" />
+            </form>
+          </div>
+        </section>
+
+        <div className="reviews">
+          <ul className="review-list">
+            {
+              this.state.reviews.map(review => {
+                return (
+                  <li className="review">
+                    <h5>{review.message}</h5>
+                  </li>
+                );
+              })
+            }
+          </ul>
         </div>
-      </section>
 
-    </div>
-  );
+      </div>
+    );
+  }
 }
 
 export default Toy;

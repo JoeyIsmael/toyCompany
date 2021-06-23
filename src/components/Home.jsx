@@ -48,12 +48,7 @@ class Home extends React.Component {
                         }
                     }
                 })
-                this.setState({ questions: docs, filteredQuestions: docs, loading_data: false })
-                if (this.state.filterBy === "popularity") {
-                    this.orderByPopularity();
-                } else if (this.state.filterBy === "recent") {
-                    this.orderByTimeStamp();
-                }
+                this.setState({})
             })
     }
 
