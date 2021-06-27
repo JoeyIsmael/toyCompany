@@ -115,7 +115,8 @@ img{
 
 .liList{
   padding-bottom: 50px;
-  border:1px solid var(--first-color);
+  border:3px solid var(--first-color);
+  border-bottom: 1.5px solid var(--first-color);
   padding: 2%;
 }
 
@@ -525,6 +526,66 @@ img{
   }
   .contact__container{
     justify-items: center;
+  }
+}
+
+.about-section{
+  background: url("https://cdn.wallpapersafari.com/43/96/AiZwFo.jpg") no-repeat left;
+  background-size: 55%;
+  background-color: #fdfdfd;
+  overflow: hidden;
+  padding: 100px 0;
+  width: fit-content;
+  block-size: fit-content;
+}
+
+.inner-container{
+  width: 55%;
+  float: right;
+  background-color: #fdfdfd;
+  padding: 150px;
+  border-radius: 10px;
+  border-color: black;
+  border-style: solid;
+}
+
+.text{
+  font-size: 18px;
+  color: #545454;
+  line-height: 30px;
+  text-align: justify;
+  margin-bottom: 40px;
+}
+
+.skills{
+  display: flex;
+  justify-content: space-between;
+  font-weight: 700;
+  font-size: 18px;
+}
+
+@media screen and (max-width:1200px){
+  .inner-container{
+      padding: 80px;
+  }
+}
+
+@media screen and (max-width:1000px){
+  .about-section{
+      background-size: 100%;
+      padding: 100px 40px;
+  }
+  .inner-container{
+      width: 100%;
+  }
+}
+
+@media screen and (max-width:600px){
+  .about-section{
+      padding: 0;
+  }
+  .inner-container{
+      padding: 60px;
   }
 }
 
