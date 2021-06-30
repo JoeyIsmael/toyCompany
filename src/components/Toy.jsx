@@ -2,6 +2,7 @@ import React from 'react';
 import firebase from "../firebase.js";
 import '../App.css'
 
+import Review from "./Review.jsx";
 
 const db = firebase.firestore();
 
@@ -39,7 +40,7 @@ class Toy extends React.Component {
         querySnapshot.docChanges().forEach(change => {
           if (change.type === 'added') {
             let doc = change.doc;
-            docs.push(doc.data());
+            docs.push(doc.id);
           } else if (change.type === 'removed') {
             let doc = change.doc;
             for (var i = 0; i < docs.length; i++) {
@@ -62,11 +63,11 @@ class Toy extends React.Component {
 
   submitHandler = (event) => {
     event.preventDefault();
-    let message = event.target["Review"].value;
+    let message = event.target["Master"].value;
 
     db.collection("toys").doc(this.state.name).collection("reviews").add({
       message: message,
-      date: new Date(),
+      date: new Date().toString(),
     })
   }
 
@@ -84,7 +85,7 @@ class Toy extends React.Component {
 
           <div class="review__container bd-grid">
             <form onSubmit={this.submitHandler} action="" class="review__form">
-              <textarea name="Review" placeholder="Message" cols="0" rows="10" class="contact__input"></textarea>
+              <textarea name="Master" placeholder="Message" cols="0" rows="10" class="contact__input"></textarea>
               <input type="submit" value="Send" class="contact__button button" />
             </form>
           </div>
@@ -95,9 +96,7 @@ class Toy extends React.Component {
             {
               this.state.reviews.map(review => {
                 return (
-                  <li className="review">
-                    <h5>{review.message}</h5>
-                  </li>
+                  <Review toy={this.state.name} id={review}/>
                 );
               })
             }
