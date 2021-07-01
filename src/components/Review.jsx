@@ -89,13 +89,13 @@ class Review extends React.Component {
                 <div className="reply">
 
                     <button onClick={this.toggleReply}>Reply</button>
-                    <section class="contact section" id="contact">
-                        <h2 class="section-title">Reply</h2>
+                    <section className="contact section" id="contact">
+                        <h2 className="section-title">Reply</h2>
 
-                        <div class="review__container bd-grid">
-                            <form onSubmit={this.submitHandler} action="" class="review__form">
-                                <textarea name="Reply" placeholder="Message" cols="0" rows="10" class="contact__input"></textarea>
-                                <input type="submit" value="Send" class="contact__button button" />
+                        <div className="review__container bd-grid">
+                            <form onSubmit={this.submitHandler} action="" className="review__form">
+                                <textarea name="Reply" placeholder="Message" cols="0" rows="10" className="contact__input"></textarea>
+                                <input type="submit" value="Send" className="contact__button button" />
                             </form>
                         </div>
                     </section>
@@ -106,7 +106,7 @@ class Review extends React.Component {
         return (
             // <div>
             //     <center>
-            //         <h2 class="section-title">{this.state.name}</h2>
+            //         <h2 className="section-title">{this.state.name}</h2>
             //         <img src={this.state.img_url} className="toy-img" />
             //     </center>
             // </div>

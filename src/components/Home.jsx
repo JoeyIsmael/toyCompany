@@ -25,6 +25,14 @@ class Home extends React.Component {
 
     componentDidMount() {
 
+        firebase.auth().onAuthStateChanged(function(user) {
+            if (user) {
+              console.log(user.email)
+            } else {
+              // No user is signed in.
+            }
+          });
+
         db.collection("toys")
             .onSnapshot((querySnapshot) => {
                 let docs = this.state.toys;

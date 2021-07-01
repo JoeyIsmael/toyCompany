@@ -8,22 +8,23 @@ const Navigation = (props) => {
 
   return (
     <div>
-      <header class="l-header">
-        <nav class="nav bd-grid">
+      <header className="l-header">
+        <nav className="nav bd-grid">
           <div>
-          <Link to="/"><a class="nav__logo">Kids Rate Toys</a></Link>
+          <Link to="/" className="nav__logo">Kids Rate Toys</Link>
           </div>
 
-          <div class="nav__menu" id="nav-menu">
-            <ul class="nav__list">
-              <Link to="/"><li class="nav__item"><a class="nav__link active">Home</a></li></Link>
-              <Link to="/about"><li class="nav__item"><a class="nav__link">About</a></li></Link>
-              <Link to="/contact"><li class="nav__item"><a class="nav__link">Contact</a></li></Link>
+          <div className="nav__menu" id="nav-menu">
+            <ul className="nav__list">
+              <li className="nav__item"><Link to="/" className="nav__link active">Home</Link></li>
+              <li className="nav__item"><Link to="/about" className="nav__link">About</Link></li>
+              <li className="nav__item"><Link to="/contact" className="nav__link">Contact</Link></li>
+              <li className="nav__item"><Link to="/signup" className="nav__link">Sign Up</Link></li>
             </ul>
           </div>
 
-          <div class="nav__toggle" id="nav-toggle">
-            <i class='bx bx-menu'></i>
+          <div className="nav__toggle" id="nav-toggle">
+            <i className='bx bx-menu'></i>
           </div>
         </nav>
       </header>
