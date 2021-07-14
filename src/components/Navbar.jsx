@@ -61,6 +61,7 @@ class Navigation extends React.Component {
             <div className="nav__menu" id="nav-menu">
               <ul className="nav__list">
                 <li className="nav__item"><Link to="/" className="nav__link active">Home</Link></li>
+                <li className="nav__item"><Link to="/create" className="nav__link ">Create</Link></li>
                 <li className="nav__item"><Link to="/about" className="nav__link">About</Link></li>
                 <li className="nav__item"><Link to="/contact" className="nav__link">Contact</Link></li>
                 {login}
