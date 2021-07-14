@@ -11,6 +11,7 @@ class Toy extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
+      header: "",
       name: this.props.match.params.name,
       img_url: "",
       title: "",
@@ -26,6 +27,7 @@ class Toy extends React.Component {
     docRef.get().then((doc) => {
       if (doc.exists) {
         console.log("Document data:", doc.data());
+        this.setState({header: doc.data().name})
         this.setState({ img_url: doc.data().img })
       } else {
         console.log("No such document!");
@@ -77,6 +79,9 @@ class Toy extends React.Component {
       <div>
         <center>
           <h2 className="section-title">{this.state.name}</h2>
+          <div className="toyheader">
+            <h2>{this.state.header}</h2>
+          </div>
           <img src={this.state.img_url} className="toy-img" />
         </center>
 

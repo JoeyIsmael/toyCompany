@@ -1,6 +1,7 @@
 import React from 'react';
 import "../App.css";
 import { Input, Button, InputGroup, InputGroupAddon } from 'reactstrap'
+import 'boxicons'
 
 import {
     Link
@@ -25,13 +26,13 @@ class Home extends React.Component {
 
     componentDidMount() {
 
-        firebase.auth().onAuthStateChanged(function(user) {
+        firebase.auth().onAuthStateChanged(function (user) {
             if (user) {
-              console.log(user.email)
+                console.log(user.email)
             } else {
-              // No user is signed in.
+                // No user is signed in.
             }
-          });
+        });
 
         db.collection("toys")
             .onSnapshot((querySnapshot) => {
@@ -74,7 +75,7 @@ class Home extends React.Component {
                     </div>
                 </div>
                 <div className="home__data">
-                    <h1 className = "head">
+                    <h1 className="head">
                         Toy Reviews
                     </h1>
                     <br></br>
@@ -93,7 +94,7 @@ class Home extends React.Component {
                                                 <h5>{toy.name}</h5>
                                                 <img src={toy.img} className="post-img" />
                                             </div>
-                                            
+
                                         </li>
                                     </Link>
                                 );
@@ -101,6 +102,15 @@ class Home extends React.Component {
                         }
                     </ul>
                 </div>
+                <footer class="footer">
+                    <p class="footer_title">Kids Rate Toys</p>
+                    <div class="footer__social">
+                        <a href="#" class="footer__icon"><i class='bx bxl-behance' ></i></a>
+                        <a href="#" class="footer__icon"><i class='bx bxl-instagram' ></i></a>
+                        <a href="#" class="footer__icon"><i class='bx bxl-twitter' ></i></a>
+                    </div>
+                    <p>@2020 copyright all rights reserved</p>
+                </footer>
             </div>
         );
     }
