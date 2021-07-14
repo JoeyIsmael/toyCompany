@@ -12,6 +12,7 @@ class Review extends React.Component {
         this.state = {
             post: this.props.toy,
             id: this.props.id,
+            username: "",
             message: "",
             date: "",
             open: false,
@@ -29,6 +30,7 @@ class Review extends React.Component {
                 console.log("Document data:", doc.data());
                 this.setState({ message: doc.data().message })
                 this.setState({ date: doc.data().date })
+                this.setState({ username: doc.data().user })
             } else {
                 console.log("No such document!");
             }
@@ -113,6 +115,7 @@ class Review extends React.Component {
 
             <li className="review">
                 <h6>{this.state.date}</h6>
+                <h5>{this.state.username}</h5>
                 <h3>{this.state.message}</h3>
 
                 {reply}

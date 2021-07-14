@@ -13,6 +13,8 @@ class Toy extends React.Component {
     this.state = {
       name: this.props.match.params.name,
       img_url: "",
+      message: "",
+      username: "-",
       title: "",
       reviews: []
     }
@@ -20,6 +22,13 @@ class Toy extends React.Component {
 
   componentDidMount() {
 
+    firebase.auth().onAuthStateChanged((user) => {
+      if (user) {
+        this.setState({ username: user.email });
+      } else {
+        // No user is signed in.
+      }
+    });
 
     var docRef = db.collection("toys").doc(this.state.name);
 
@@ -63,12 +72,19 @@ class Toy extends React.Component {
 
   submitHandler = (event) => {
     event.preventDefault();
-    let message = event.target["Master"].value;
+    if (this.state.username == "-") {
+      this.setState({ message: "You must be signed in to leave reviews" })
 
-    db.collection("toys").doc(this.state.name).collection("reviews").add({
-      message: message,
-      date: new Date().toString(),
-    })
+    } else {
+      let message = event.target["Master"].value;
+
+      this.setState({ message: "" })
+      db.collection("toys").doc(this.state.name).collection("reviews").add({
+        user: this.state.username,
+        message: message,
+        date: new Date().toString(),
+      })
+    }
   }
 
 
@@ -83,6 +99,8 @@ class Toy extends React.Component {
         <section className="contact section" id="contact">
           <h2 className="section-title">Add a Review</h2>
 
+          <h4>{this.state.message}</h4>
+
           <div className="review__container bd-grid">
             <form onSubmit={this.submitHandler} action="" className="review__form">
               <textarea name="Master" placeholder="Message" cols="0" rows="10" className="contact__input"></textarea>
@@ -96,7 +114,7 @@ class Toy extends React.Component {
             {
               this.state.reviews.map(review => {
                 return (
-                  <Review toy={this.state.name} id={review}/>
+                  <Review toy={this.state.name} id={review} />
                 );
               })
             }
