@@ -20,9 +20,21 @@ class Login extends React.Component {
         let email = event.target["email"].value;
         let password = event.target["password"].value;
 
+        let response = ""
+
         try {
-            firebase.auth().signInWithEmailAndPassword(email, password)
-            this.setState({message: "Success"})
+            response = "Success"
+            firebase.auth().signInWithEmailAndPassword(email, password).catch((error) => {
+                // Handle Errors here.
+                var errorCode = error.code;
+                if (errorCode === 'auth/wrong-password') {
+                    response = "Password is wrong"
+                    console.log(response)
+                }
+                console.log(error);
+            }).then(() => {
+                this.setState({message: response});
+            });
         } catch (err) {
             console.log(err);
         }

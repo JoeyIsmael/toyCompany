@@ -14,6 +14,7 @@ class Navigation extends React.Component {
 
     this.state = {
       logged: false,
+      update: 0,
     }
   }
 
@@ -31,9 +32,11 @@ class Navigation extends React.Component {
     });
   }
 
-  signOut() {
+  signOut = () => {
     try {
       firebase.auth().signOut()
+      // this.setState({})
+      window.location.reload();
     } catch (err) {
       console.log(err)
     }
@@ -41,7 +44,9 @@ class Navigation extends React.Component {
 
   render() {
 
-    let login = <li className="nav__item"><Link to="/signup" className="nav__link">Sign Up</Link></li>
+    let login = <li className="nav__item"><Link to="/login" className="nav__link">Login</Link></li>
+
+    console.log(this.state.logged)
 
     if (this.state.logged) {
       login = (
