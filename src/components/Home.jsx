@@ -91,7 +91,7 @@ class Home extends React.Component {
                                     <Link to={"/toy/" + toy.id}>
                                         <li className="liList">
                                             <div>
-                                                <h5>{toy.name}</h5>
+                                                <h5>{toy.id}</h5>
                                                 <img src={toy.img} className="post-img" />
                                             </div>
 
