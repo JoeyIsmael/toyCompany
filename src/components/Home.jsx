@@ -20,6 +20,7 @@ class Home extends React.Component {
 
         this.state = {
             toys: [],
+            filteredToys: [],
         }
 
     }
@@ -57,8 +58,17 @@ class Home extends React.Component {
                         }
                     }
                 })
-                this.setState({})
+                this.setState({ filteredToys: docs })
             })
+    }
+
+    handleSearch = (event) => {
+        let value = event.target.value
+        if (value === "") {
+            this.setState({ filteredToys: this.state.toys })
+        } else {
+            this.setState({ filteredToys: this.state.toys.filter(item => item.name.toLowerCase().includes(value.toLowerCase())) })
+        }
     }
 
 
@@ -68,10 +78,7 @@ class Home extends React.Component {
                 <div className="Banner">
                     <div className="title1">
                         <h1 className="title2">Looking for a Toy Product Review?</h1>
-                        <InputGroup>
-                            <Input className="searchbar" placeholder="Find a Toy" />
-                            <InputGroupAddon addonType="prepend"><Button>Search</Button></InputGroupAddon>
-                        </InputGroup>
+                        <Input name="search" className="searchbar" onChange={this.handleSearch} placeholder="Find a Toy" />
                     </div>
                 </div>
                 <div className="home__data">
@@ -86,12 +93,12 @@ class Home extends React.Component {
                 <div className="ToyList">
                     <ul className="list">
                         {
-                            this.state.toys.map(toy => {
+                            this.state.filteredToys.map(toy => {
                                 return (
                                     <Link to={"/toy/" + toy.id}>
                                         <li className="liList">
                                             <div>
-                                                <h5>{toy.id}</h5>
+                                                <h5>{toy.name}</h5>
                                                 <img src={toy.img} className="post-img" />
                                             </div>
 

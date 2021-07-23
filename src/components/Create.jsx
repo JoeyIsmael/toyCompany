@@ -11,24 +11,39 @@ class Create extends React.Component {
         super(props);
 
         this.state = {
-            message: ""
+            message: "",
+            username: "-",
         }
+    }
+
+    componentDidMount() {
+        firebase.auth().onAuthStateChanged((user) => {
+            if (user) {
+                this.setState({ username: user.email });
+            } else {
+                // No user is signed in.
+            }
+        });
     }
 
     submitHandler = (event) => {
         event.preventDefault();
-        let message = event.target["desc"].value;
-        let name = event.target["name"].value;
-        let url = event.target["url"].value;
+        if (this.state.username === "-") {
+            this.setState({ message: "you must be logged in to post " });
+        } else {
+            let id = event.target["id"].value;
+            let name = event.target["name"].value;
+            let url = event.target["url"].value;
 
-        this.setState({ message: "" })
-        db.collection("toys").doc(name).set({
-            name: name,
-            message: message,
-            url: url,
-        })
+            this.setState({ message: "" })
+            db.collection("toys").doc(name).set({
+                name: name,
+                id: id,
+                img: url,
+            })
 
-        this.setState({ message: "Successfully Created Post" })
+            this.setState({ message: "Successfully Created Post" })
+        }
     }
 
     render() {
@@ -51,7 +66,7 @@ class Create extends React.Component {
                             <form onSubmit={this.submitHandler} action="" className="review__form">
                                 <textarea name="name" placeholder="Name" cols="0" rows="1" className="contact__input"></textarea>
                                 <textarea name="url" placeholder="Image Url" cols="0" rows="1" className="contact__input"></textarea>
-                                <textarea name="desc" placeholder="Short Description" cols="0" rows="10" className="contact__input"></textarea>
+                                <textarea name="id" placeholder="Id" cols="0" rows="1" className="contact__input"></textarea>
                                 <input type="submit" value="Send" className="contact__button button" />
                             </form>
                         </div>
