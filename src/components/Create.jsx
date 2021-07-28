@@ -29,7 +29,7 @@ class Create extends React.Component {
     submitHandler = (event) => {
         event.preventDefault();
         if (this.state.username === "-") {
-            this.setState({ message: "you must be logged in to post " });
+            this.setState({ message: "You must be logged in to post " });
         } else {
             let id = event.target["id"].value;
             let name = event.target["name"].value;
@@ -56,17 +56,29 @@ class Create extends React.Component {
 
                         Fill out the following forum to create a page for a new product to be listed where you can be the first to review it.
                     </p>
+                    <h4>Example Toy Review:</h4>
+                    
+                    <iframe src='https://www.youtube.com/embed/T3HUSdjYG7Y'
+                        width="420" 
+                        height="315"
+                        frameborder='0'
+                        allow='autoplay; encrypted-media'
+                        allowfullscreen
+                        title='video'
+                    />
 
                     <section className="contact section" id="contact">
                         <h2 className="section-title">Add a Toy</h2>
-
-                        <h4>{this.state.message}</h4>
+                        <div className="Notification">
+                            <h4>{this.state.message}</h4>
+                        </div>
+                        
 
                         <div className="review__container bd-grid">
                             <form onSubmit={this.submitHandler} action="" className="review__form">
-                                <textarea name="name" placeholder="Name" cols="0" rows="1" className="contact__input"></textarea>
+                                <textarea name="name" placeholder="Full Name (include price among other details)" cols="0" rows="1" className="contact__input"></textarea>
                                 <textarea name="url" placeholder="Image Url" cols="0" rows="1" className="contact__input"></textarea>
-                                <textarea name="id" placeholder="Id" cols="0" rows="1" className="contact__input"></textarea>
+                                <textarea name="id" placeholder="Title" cols="0" rows="1" className="contact__input"></textarea>
                                 <input type="submit" value="Send" className="contact__button button" />
                             </form>
                         </div>

@@ -23,12 +23,12 @@ class Login extends React.Component {
         let response = ""
 
         try {
-            response = "Success"
+            response = "Successfully Signed In"
             firebase.auth().signInWithEmailAndPassword(email, password).catch((error) => {
                 // Handle Errors here.
                 var errorCode = error.code;
                 if (errorCode === 'auth/wrong-password') {
-                    response = "Password is wrong"
+                    response = "Password or Email is wrong"
                     console.log(response)
                 }
                 console.log(error);
@@ -45,9 +45,12 @@ class Login extends React.Component {
     render() {
         return (
             <div className="App">
-                <h1 className="message">{this.state.message}</h1>
+                
                 <section className="contact section" id="contact">
                     <h2 className="section-title">Login</h2>
+                    <div className="Notification">
+                        <h1 className="message">{this.state.message}</h1>
+                    </div>
                     <div className="review__container bd-grid">
                         <form onSubmit={this.submitHandler} action="" className="review__form">
                             <input type="email" name="email" placeholder="Email" className="contact__input" />
