@@ -12,6 +12,7 @@ class Review extends React.Component {
         this.state = {
             post: this.props.toy,
             id: this.props.id,
+            email: "",
             username: "",
             message: "",
             date: "",
@@ -21,6 +22,14 @@ class Review extends React.Component {
     }
 
     componentDidMount() {
+
+        firebase.auth().onAuthStateChanged((user) => {
+            if (user) {
+                this.setState({ email: user.email });
+            } else {
+                // No user is signed in.
+            }
+        });
 
 
         var docRef = db.collection("toys").doc(this.state.post).collection("reviews").doc(this.props.id);
@@ -48,14 +57,14 @@ class Review extends React.Component {
                     } else if (change.type === 'removed') {
                         let doc = change.doc;
                         for (var i = 0; i < docs.length; i++) {
-                            if (docs[i].getId() === doc.id) {
+                            if (this.state.reviews[i] == doc.id) {
                                 docs.splice(i, 1);
                             }
                         }
                     } else if (change.type === 'modified') {
                         let doc = change.doc;
                         for (let i = 0; i < docs.length; i++) {
-                            if (docs[i].getId() === doc.id) {
+                            if (this.state.reviews[i] == doc.id) {
                                 docs.splice(i, 1, doc);
                             }
                         }
@@ -67,6 +76,27 @@ class Review extends React.Component {
 
     toggleReply = () => {
         this.setState({ open: !this.state.open });
+    }
+
+    delete = () => {
+        let replies = [];
+
+        db.collection("toys").doc(this.state.post).collection("reviews").get().then(querySnapshot => {
+            querySnapshot.docs.forEach(doc => {
+                replies.push(doc.id);
+            })
+            return replies;
+        }).then(replies => {
+            replies.forEach(id => {
+                db.collection("toys").doc(this.state.post).collection("reviews").doc(id).delete().then(doc => {
+                    console.log("Successfully deleted reply with id: ", id);
+                })
+            })
+        }).then(() => {
+            db.collection("toys").doc(this.state.post).delete().catch((error) => {
+                console.error("Error removing document: ", error);
+            })
+        });
     }
 
     submitHandler = (event) => {
@@ -85,6 +115,14 @@ class Review extends React.Component {
         let reply = (
             <button onClick={this.toggleReply}>Reply</button>
         )
+
+        let deleter;
+
+        if (this.state.email === this.state.username) {
+            deleter = (
+                <button onClick={this.delete}>Delete</button>
+            )
+        }
 
         if (this.state.open) {
             reply = (
@@ -119,6 +157,7 @@ class Review extends React.Component {
                 <h3>{this.state.message}</h3>
 
                 {reply}
+                {deleter}
 
 
 

@@ -27,9 +27,20 @@ class Login extends React.Component {
             firebase.auth().signInWithEmailAndPassword(email, password).catch((error) => {
                 // Handle Errors here.
                 var errorCode = error.code;
+                console.log(error.code);
                 if (errorCode === 'auth/wrong-password') {
                     response = "Password or Email is wrong"
                     console.log(response)
+                }
+                switch(errorCode) {
+                    case 'auth/wrong-password':
+                        response = "Password or Email is wrong"
+                        console.log(response)
+                        break;
+                    case 'auth/user-not-found':
+                        response = "User does not exist with this email"
+                        console.log(response)
+                        break;
                 }
                 console.log(error);
             }).then(() => {

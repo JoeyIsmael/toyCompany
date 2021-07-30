@@ -55,14 +55,14 @@ class Toy extends React.Component {
           } else if (change.type === 'removed') {
             let doc = change.doc;
             for (var i = 0; i < docs.length; i++) {
-              if (docs[i].getId() === doc.id) {
+              if (this.state.reviews[i] == doc.id) {
                 docs.splice(i, 1);
               }
             }
           } else if (change.type === 'modified') {
             let doc = change.doc;
             for (let i = 0; i < docs.length; i++) {
-              if (docs[i].getId() === doc.id) {
+              if (this.state.reviews[i] == doc.id) {
                 docs.splice(i, 1, doc);
               }
             }
